@@ -5,7 +5,7 @@ Each cursor selects an element, types its text letter by letter, reveals the blo
 
 ![Cursors building the page live](demo.gif)
 
-▶️ [Watch the full video (35 s)](demo.mp4)
+▶️ [Watch the full video (35 s)](demo.mp4) · The demo page is the project's own landing page: it builds itself.
 
 ![Chantier en direct preview](apercu.png)
 
@@ -66,6 +66,7 @@ On the `<script>` tag:
 | `data-agents` | `16` (`10` on mobile) | number of cursors |
 | `data-noms` | `Nova,Pixel,Byte,…` | cursor names, comma-separated |
 | `data-auto` | `true` | `false` to not start automatically |
+| `data-lang` | the page's `<html lang>` | language of the control bar: `en` or `fr` |
 
 In JavaScript:
 
@@ -77,13 +78,13 @@ Chantier.toutConstruire();  // show everything at once
 In CSS, you can override `--chantier-hud`, `--chantier-texte`, `--chantier-encre` and `--chantier-duree`.
 The cursor colors are in the `COULEURS` array at the top of `js/chantier.js`.
 
-> The control bar text is in French ("Analyse de la page…", "Rejouer"…). You can translate it in `js/chantier.js`.
+The control bar speaks English and French. To add another language, extend the `TXT` object in `js/chantier.js`.
 
 ## Project structure
 
 ```
 chantier-en-direct/
-├── index.html          # demo page (a portfolio)
+├── index.html          # demo page: the project's own landing page, built live
 ├── css/
 │   ├── style.css       # demo page styles
 │   └── chantier.css    # engine styles: cursors, boxes, control bar
