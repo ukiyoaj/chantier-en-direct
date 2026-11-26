@@ -18,6 +18,8 @@
  *   data-agents="16"     nombre de curseurs (10 par défaut sur mobile)
  *   data-noms="A,B,C"    noms des curseurs
  *   data-auto="false"    ne pas démarrer tout seul (lancer avec Chantier.lancer())
+ *   data-lang="en"       langue de la barre de contrôle : "fr" ou "en"
+ *                        (par défaut : la langue de la page, <html lang="…">)
  */
 (function () {
   'use strict';
@@ -29,6 +31,13 @@
 
   var COULEURS = ['#ff8fa3', '#7cc6ff', '#ffd166', '#7ef0b5', '#c59bff', '#ff9f5a', '#5ee7f0', '#ff6bd6',
                   '#b5f05e', '#9fa8ff', '#ffb3c7', '#6effa0', '#f5e663', '#ff7a7a', '#8ff0ff', '#d2a6ff'];
+  var LANGUE = (opt.lang || root.lang || 'fr').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+  var TXT = {
+    fr: { analyse: 'Analyse de la page…', agents: 'agents', calques: 'calques', termine: 'Terminé', rejouer: 'Rejouer',
+          lancer: 'Lancer l\'animation', reduit: 'Animations réduites sur cet appareil', prete: 'Page prête', passer: 'Tout construire d\'un coup' },
+    en: { analyse: 'Scanning page…', agents: 'agents', calques: 'layers', termine: 'Done', rejouer: 'Replay',
+          lancer: 'Start the animation', reduit: 'Reduced motion is on', prete: 'Page ready', passer: 'Build everything at once' }
+  }[LANGUE];
   var NOMS = (opt.noms ? opt.noms.split(',') : ['Nova', 'Pixel', 'Byte', 'Echo', 'Volt', 'Sora', 'Kiro', 'Lumen',
               'Flux', 'Orion', 'Zed', 'Mika', 'Rune', 'Iris', 'Tak', 'Vega']).map(function (s) { return s.trim(); });
 
@@ -49,12 +58,12 @@
     logo = el('div'); logo.id = 'chantier-logo';
     logo.textContent = opt.logo || (document.title || '✦').trim().slice(0, 2).toLowerCase();
     barre = el('div', 'chantier-barre',
-      '<span class="chantier-points"></span><span class="chantier-etat">Analyse de la page…</span>' +
+      '<span class="chantier-points"></span><span class="chantier-etat">' + TXT.analyse + '</span>' +
       '<span class="chantier-jauge"><i></i></span>' +
       '<button data-a="tour" class="actif" aria-pressed="true">Tour</button>' +
       '<button data-a="vitesse">1×</button>' +
-      '<button data-a="passer" aria-label="Tout construire d\'un coup">×</button>' +
-      '<button data-a="rejouer" hidden>Rejouer</button>');
+      '<button data-a="passer" aria-label="' + TXT.passer + '">×</button>' +
+      '<button data-a="rejouer" hidden>' + TXT.rejouer + '</button>');
     document.body.append(calque, traces, logo, barre);
     ctx = traces.getContext('2d');
     ui.points = barre.querySelector('.chantier-points');
@@ -192,16 +201,16 @@
 
   function majBarre() {
     ui.jauge.style.width = (faits / total * 100) + '%';
-    if (phase === 'analyse') ui.etat.textContent = 'Analyse de la page…';
-    else if (phase === 'construction') ui.etat.textContent = agents.length + ' agents · ' + faits + ' / ' + total + ' calques';
-    else ui.etat.textContent = 'Terminé · ' + total + ' calques';
+    if (phase === 'analyse') ui.etat.textContent = TXT.analyse;
+    else if (phase === 'construction') ui.etat.textContent = agents.length + ' ' + TXT.agents + ' · ' + faits + ' / ' + total + ' ' + TXT.calques;
+    else ui.etat.textContent = TXT.termine + ' · ' + total + ' ' + TXT.calques;
   }
   function boutonsFin(texte) {
     ui.tour.hidden = ui.vitesse.hidden = ui.passer.hidden = true;
     ui.rejouer.hidden = false; ui.rejouer.textContent = texte;
   }
   function fin() {
-    phase = 'fin'; tFin = 0; tour = false; boutonsFin('Rejouer');
+    phase = 'fin'; tFin = 0; tour = false; boutonsFin(TXT.rejouer);
     agents.forEach(function (a, i) {
       lacher(a); a.st = 'depart';
       var an = i / agents.length * 6.28;
@@ -276,8 +285,8 @@
     if (RM || opt.auto === 'false') {
       taches.forEach(terminer); logo.classList.add('parti'); phase = 'fin';
       ui.jauge.style.width = '100%';
-      ui.etat.textContent = RM ? 'Animations réduites sur cet appareil' : 'Page prête';
-      boutonsFin('Lancer l\'animation');
+      ui.etat.textContent = RM ? TXT.reduit : TXT.prete;
+      boutonsFin(TXT.lancer);
       return;
     }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(go, go);
