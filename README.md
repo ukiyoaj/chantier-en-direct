@@ -1,113 +1,117 @@
 # 🏗️ Chantier en direct
 
-Des **curseurs colorés** construisent ta page web **sous tes yeux**, comme une équipe sur un fichier de design multijoueur.
-Chaque curseur sélectionne un élément, tape le texte lettre par lettre, fait apparaître les blocs, puis passe au suivant pendant que la page descend toute seule.
+*"Live construction site"*: **colored cursors** build your web page **right in front of you**, like a team working in a multiplayer design file.
+Each cursor selects an element, types its text letter by letter, reveals the blocks, then moves on to the next one while the page scrolls down on its own.
 
-![Les curseurs construisent la page en direct](demo.gif)
+![Cursors building the page live](demo.gif)
 
-▶️ [Voir la vidéo complète (35 s)](demo.mp4)
+▶️ [Watch the full video (35 s)](demo.mp4)
 
-![Aperçu de Chantier en direct](apercu.png)
+![Chantier en direct preview](apercu.png)
 
-**Démo en ligne :** https://ukiyoaj.github.io/chantier-en-direct/
+**Live demo:** https://ukiyoaj.github.io/chantier-en-direct/
 
-## Fonctionnalités
+## Features
 
-- **16 curseurs** nommés et colorés (10 sur mobile), avec traînées de « + »
-- **Phase d'analyse** : les curseurs tournent autour d'un logo central avant de se mettre au travail
-- **Cadres de sélection** avec étiquette et dimensions réelles (`titre · 323×25`)
-- **Texte tapé** lettre par lettre, sans faire bouger la mise en page
-- **Défilement automatique** qui suit le chantier (il s'arrête dès que le visiteur scrolle lui-même)
-- **Barre de contrôle** : Tour (défilement auto), vitesse 1× / 2× / 4×, tout construire d'un coup, rejouer
-- Respecte l'option **« Réduire les animations »** du système : la page s'affiche directement avec un bouton pour lancer l'animation
-- **Aucune dépendance**, un seul fichier JS et un seul fichier CSS à ajouter
-- Si le script ne se charge pas, la page s'affiche normalement
+- **16 named, colored cursors** (10 on mobile) with "+" trails
+- **Scan phase**: the cursors circle a central logo before getting to work
+- **Selection boxes** with a label and real dimensions (`titre · 323×25`)
+- **Typed text**, letter by letter, without shifting the layout
+- **Auto-scroll** that follows the build (it stops as soon as the visitor scrolls)
+- **Control bar**: Tour (auto-scroll), 1× / 2× / 4× speed, build everything at once, replay
+- Respects the system's **"Reduce motion"** setting: the page shows up finished, with a button to start the animation
+- **No dependencies**: just one JS file and one CSS file to add
+- If the script fails to load, the page simply displays normally
 
-## Utiliser le moteur sur ton propre site
+## Add it to your own site
 
-**1. Copie** `css/chantier.css` et `js/chantier.js` dans ton projet.
+**1. Copy** `css/chantier.css` and `js/chantier.js` into your project.
 
-**2. Ajoute-les dans le `<head>`** (le script doit être dans le head et **sans** `defer`, pour cacher les blocs avant l'affichage) :
+**2. Add them to your `<head>`** (the script must be in the head and **without** `defer`, so it can hide the blocks before the page is displayed):
 
 ```html
 <link rel="stylesheet" href="css/chantier.css">
 <script src="js/chantier.js" data-logo="aj"></script>
 ```
 
-**3. Marque tes éléments** :
+**3. Mark your elements:**
 
 ```html
-<section data-frame data-l="hero">            <!-- zone encadrée en premier -->
-  <h1 class="b t" data-l="titre">Mon nom</h1>  <!-- texte tapé lettre par lettre -->
-  <p class="b t">Un peu de texte.</p>
-  <img class="b" src="photo.jpg" alt="">       <!-- bloc qui apparaît de gauche à droite -->
-  <div class="carte b">                         <!-- un bloc peut contenir d'autres blocs : -->
-    <h3 class="b t">Projet</h3>                 <!-- ils sont construits après lui -->
+<section data-frame data-l="hero">            <!-- area framed first -->
+  <h1 class="b t" data-l="title">My name</h1>  <!-- text typed letter by letter -->
+  <p class="b t">Some text.</p>
+  <img class="b" src="photo.jpg" alt="">       <!-- block revealed left to right -->
+  <div class="card b">                          <!-- a block can contain other blocks: -->
+    <h3 class="b t">Project</h3>                <!-- they're built after it -->
   </div>
 </section>
 ```
 
-| Marqueur | Effet |
+That's it: the engine finds the marked elements and builds them in page order.
+
+| Marker | Effect |
 |---|---|
-| `class="b"` | bloc construit par un curseur |
-| `class="b t"` | texte tapé lettre par lettre (**texte simple**, sans balises à l'intérieur) |
-| `data-frame` | zone encadrée avant d'être remplie ; son fond apparaît à ce moment-là |
-| `data-l="nom"` | nom affiché sur l'étiquette du cadre (sinon, le nom de la balise) |
+| `class="b"` | block built by a cursor |
+| `class="b t"` | text typed letter by letter (**plain text only**, no tags inside) |
+| `data-frame` | area framed before being filled; its background appears at that moment |
+| `data-l="name"` | name shown on the selection box label (defaults to the tag name) |
 
 ### Options
 
-Sur la balise `<script>` :
+On the `<script>` tag:
 
-| Attribut | Par défaut | Rôle |
+| Attribute | Default | What it does |
 |---|---|---|
-| `data-logo` | 2 premières lettres du titre | texte du logo central |
-| `data-agents` | `16` (`10` sur mobile) | nombre de curseurs |
-| `data-noms` | `Nova,Pixel,Byte,…` | noms des curseurs, séparés par des virgules |
-| `data-auto` | `true` | `false` pour ne pas démarrer tout seul |
+| `data-logo` | first 2 letters of the page title | text of the central logo |
+| `data-agents` | `16` (`10` on mobile) | number of cursors |
+| `data-noms` | `Nova,Pixel,Byte,…` | cursor names, comma-separated |
+| `data-auto` | `true` | `false` to not start automatically |
 
-En JavaScript :
+In JavaScript:
 
 ```js
-Chantier.lancer();          // (re)lance la construction
-Chantier.toutConstruire();  // affiche tout d'un coup
+Chantier.lancer();          // start (or restart) the build
+Chantier.toutConstruire();  // show everything at once
 ```
 
-En CSS, tu peux surcharger `--chantier-hud`, `--chantier-texte`, `--chantier-encre` et `--chantier-duree`.
-Les couleurs des curseurs sont dans le tableau `COULEURS` en haut de `js/chantier.js`.
+In CSS, you can override `--chantier-hud`, `--chantier-texte`, `--chantier-encre` and `--chantier-duree`.
+The cursor colors are in the `COULEURS` array at the top of `js/chantier.js`.
 
-## Structure
+> The control bar text is in French ("Analyse de la page…", "Rejouer"…). You can translate it in `js/chantier.js`.
+
+## Project structure
 
 ```
 chantier-en-direct/
-├── index.html          # page de démo (un portfolio)
+├── index.html          # demo page (a portfolio)
 ├── css/
-│   ├── style.css       # styles de la démo
-│   └── chantier.css    # styles du moteur : curseurs, cadres, barre
+│   ├── style.css       # demo page styles
+│   └── chantier.css    # engine styles: cursors, boxes, control bar
 ├── js/
-│   └── chantier.js     # le moteur
-├── demo.gif            # animation affichée dans ce README
-├── demo.mp4            # vidéo complète de la démo
-├── apercu.png          # capture d'écran
+│   └── chantier.js     # the engine
+├── demo.gif            # animation shown in this README
+├── demo.mp4            # full demo video
+├── apercu.png          # screenshot
 ├── LICENSE
 └── README.md
 ```
 
-## Comment ça marche
+## How it works
 
-1. Au chargement, le script liste tous les éléments `.b` et `[data-frame]` dans l'ordre de la page : ce sont les « calques ».
-2. Chaque curseur prend le prochain calque libre, en priorité un calque visible à l'écran. Un calque à l'intérieur d'un autre attend que son parent soit construit.
-3. Le curseur vole jusqu'à l'élément (`getBoundingClientRect`), trace le cadre, puis :
-   - pour un texte, le coupe en deux `span` (partie tapée + reste transparent) pour que rien ne bouge ;
-   - pour un bloc, lance une animation CSS `clip-path`.
-4. Une boucle `requestAnimationFrame` déplace les curseurs avec un lissage exponentiel, dessine les traînées sur un `<canvas>` et fait défiler la page vers la zone en construction.
+1. On load, the script lists every `.b` and `[data-frame]` element in page order: these are the "layers".
+2. Each cursor takes the next free layer, preferring one that's visible on screen. A layer inside another one waits until its parent is built.
+3. The cursor flies to the element (`getBoundingClientRect`), draws the selection box, then:
+   - for text, splits it into two `span`s (typed part + transparent remainder) so nothing moves;
+   - for a block, plays a CSS `clip-path` animation.
+4. A `requestAnimationFrame` loop moves the cursors with exponential smoothing, draws the trails on a `<canvas>` and scrolls the page toward the area being built.
 
-## Mettre en ligne avec GitHub Pages
+## Deploy with GitHub Pages
 
-1. Pousse le dépôt sur GitHub.
-2. Va dans **Settings → Pages**.
-3. Dans *Source*, choisis la branche `main` et le dossier `/ (root)`, puis enregistre.
-4. Le site est en ligne sur `https://<ton-pseudo>.github.io/chantier-en-direct/`.
+1. Push the repository to GitHub.
+2. Go to **Settings → Pages**.
+3. Under *Source*, pick the `main` branch and the `/ (root)` folder, then save.
+4. The site is live at `https://<your-username>.github.io/chantier-en-direct/`.
 
-## Licence
+## License
 
-[MIT](LICENSE) © 2026 Amine Jebali ([@ukiyoaj](https://github.com/ukiyoaj)). Tu peux l'utiliser, le modifier et le partager librement, en gardant la mention de licence.
+[MIT](LICENSE) © 2026 Amine Jebali ([@ukiyoaj](https://github.com/ukiyoaj)). You're free to use, modify and share it, as long as you keep the license notice.
