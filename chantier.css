@@ -1,0 +1,133 @@
+/*!
+ * Chantier en direct — styles du moteur (curseurs, cadres, barre de contrôle).
+ * (c) 2026 Amine Jebali (@ukiyoaj) — Licence MIT
+ *
+ * Variables que tu peux surcharger dans ta propre feuille :
+ *   --chantier-hud      fond de la barre de contrôle
+ *   --chantier-texte    texte de la barre
+ *   --chantier-encre    couleur du texte dans les étiquettes des curseurs
+ *   --chantier-duree    durée d'apparition d'un bloc
+ */
+:root {
+  --chantier-hud: rgba(38, 23, 46, .86);
+  --chantier-texte: #f6eef5;
+  --chantier-encre: #1a0f1f;
+  --chantier-duree: .55s;
+  --chantier-vitesse: 1;
+}
+
+/* Éléments en attente de construction */
+.chantier .b { opacity: 0; }
+.chantier [data-frame]:not(.on) { background-color: transparent !important; }
+[data-frame] { transition: background-color .6s; }
+
+/* Apparition */
+.b.on {
+  opacity: 1;
+  animation: chantier-revele calc(var(--chantier-duree) / var(--chantier-vitesse)) cubic-bezier(.2, .8, .2, 1);
+}
+.t.on { animation: none; }
+svg .b { transform-box: fill-box; transform-origin: center; }
+svg .b.on { animation: chantier-pop calc(.5s / var(--chantier-vitesse)) cubic-bezier(.3, 1.6, .5, 1); }
+
+@keyframes chantier-revele {
+  0%   { clip-path: inset(0 100% 0 0); filter: brightness(2.4); }
+  100% { clip-path: inset(0); filter: none; }
+}
+@keyframes chantier-pop {
+  0%   { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+/* Texte tapé */
+.chantier-tape { border-right: 2px solid var(--c, #fff); }
+.chantier-fantome { color: transparent; }
+
+/* Calques */
+#chantier-calque { position: absolute; left: 0; top: 0; width: 100%; height: 0; z-index: 9000; pointer-events: none; }
+#chantier-traces { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 8999; pointer-events: none; }
+
+/* Curseurs */
+.chantier-curseur { position: absolute; left: 0; top: 0; will-change: transform; transition: opacity .6s; }
+.chantier-curseur svg { display: block; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .5)); }
+.chantier-curseur path { fill: var(--c); stroke: #fff; stroke-width: 1.3; stroke-linejoin: round; }
+.chantier-curseur span {
+  position: absolute; left: 16px; top: 18px;
+  background: var(--c); color: var(--chantier-encre);
+  font: 600 13px Inter, system-ui, sans-serif;
+  padding: 2px 8px; border-radius: 7px 7px 7px 2px;
+  white-space: nowrap;
+}
+
+/* Cadres de sélection */
+.chantier-cadre {
+  position: absolute;
+  border: 1.5px solid var(--c);
+  background: color-mix(in srgb, var(--c) 9%, transparent);
+  transition: opacity .45s;
+}
+.chantier-cadre::before, .chantier-cadre::after {
+  content: ""; position: absolute; width: 7px; height: 7px;
+  background: #fff; border: 1.5px solid var(--c);
+}
+.chantier-cadre::before { left: -4.5px; top: -4.5px; }
+.chantier-cadre::after { right: -4.5px; bottom: -4.5px; }
+.chantier-cadre i {
+  position: absolute; bottom: 100%; left: -1.5px; margin-bottom: 3px;
+  background: var(--c); color: var(--chantier-encre);
+  font: 600 13px Inter, system-ui, sans-serif; font-style: normal;
+  padding: 1px 7px; border-radius: 5px; white-space: nowrap;
+}
+.chantier-cadre.fin { opacity: 0; }
+
+/* Logo central pendant l'analyse */
+#chantier-logo {
+  position: fixed; left: 50%; top: 50%;
+  width: 76px; height: 76px; margin: -38px 0 0 -38px;
+  border-radius: 20px;
+  background: #e9e2ec; color: var(--chantier-encre);
+  display: grid; place-items: center;
+  font: 700 28px Inter, system-ui, sans-serif;
+  z-index: 8998;
+  box-shadow: 0 0 60px rgba(255, 143, 163, .35);
+  transition: opacity .6s, transform .6s;
+}
+#chantier-logo.parti { opacity: 0; transform: scale(.6); pointer-events: none; }
+
+/* Barre de contrôle */
+.chantier-barre {
+  position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%);
+  z-index: 9001;
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 6px 6px 16px;
+  border-radius: 999px;
+  background: var(--chantier-hud);
+  color: var(--chantier-texte);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, .09);
+  font: 13px Inter, system-ui, sans-serif;
+  white-space: nowrap;
+  max-width: calc(100vw - 20px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .4);
+}
+.chantier-points { display: flex; }
+.chantier-points i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #26172e; margin-left: -4px; }
+.chantier-points i:first-child { margin-left: 0; }
+.chantier-jauge { width: 90px; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, .15); overflow: hidden; }
+.chantier-jauge i { display: block; height: 100%; width: 0; background: var(--chantier-texte); transition: width .2s; }
+.chantier-barre button {
+  min-width: 44px; min-height: 44px;
+  border-radius: 999px; border: 0;
+  background: rgba(255, 255, 255, .08); color: var(--chantier-texte);
+  font: 600 13px Inter, system-ui, sans-serif;
+  padding: 0 14px; cursor: pointer;
+}
+.chantier-barre button.actif { background: var(--chantier-texte); color: var(--chantier-encre); }
+.chantier-barre button:focus-visible { outline: 2px solid var(--chantier-texte); outline-offset: 2px; }
+.chantier-barre [hidden] { display: none; }
+
+@media (max-width: 600px) {
+  .chantier-jauge, .chantier-points { display: none; }
+  .chantier-barre { gap: 6px; padding-left: 12px; }
+  .chantier-barre button { padding: 0 10px; }
+}

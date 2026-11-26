@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chantier en direct — démo</title>
+  <meta name="description" content="Des curseurs colorés construisent la page sous tes yeux.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/chantier.css">
+  <!-- Le moteur se charge dans le head, sans defer, pour cacher les blocs avant l'affichage -->
+  <script src="js/chantier.js" data-logo="aj"></script>
+</head>
+<body>
+
+<header data-frame data-l="nav">
+<nav>
+  <a class="logo b" href="#top" data-l="logo"><i>aj</i>ukiyoaj</a>
+  <div class="links">
+    <a class="b" href="#projets" data-l="lien">Projets</a>
+    <a class="b" href="#parcours" data-l="lien">Parcours</a>
+    <a class="b" href="#hors" data-l="lien">Hors écran</a>
+    <a class="b" href="#contact" data-l="lien">Contact</a>
+  </div>
+</nav>
+</header>
+
+<section class="band" id="top" data-frame data-l="hero">
+<div class="in hero">
+  <div>
+    <p class="kick t b" data-l="eyebrow">Étudiant en BUT Informatique · IUT de Bordeaux</p>
+    <h1 class="t b" data-l="h1">Amine Jebali</h1>
+    <p class="lead t b" data-l="intro">Je construis des choses qui sortent de l'écran : un assistant IA personnel, des robots, un serveur maison, des applis avec leur propre base de données.</p>
+    <div class="cta">
+      <a class="btn main b" href="#projets" data-l="bouton">Voir les projets</a>
+      <a class="btn b" href="#contact" data-l="bouton">Me contacter</a>
+    </div>
+    <div class="facts">
+      <span class="b" data-l="info"><b>Bordeaux</b> · IUT</span>
+      <span class="b" data-l="info"><b>Délégué</b> de 1re année</span>
+      <span class="b" data-l="info"><b>GitHub</b> @ukiyoaj</span>
+    </div>
+  </div>
+  <div class="fig b" data-l="système">
+    <svg viewBox="0 0 520 480" role="img" aria-label="Les projets d'Amine en orbite autour de ses initiales">
+      <defs>
+        <radialGradient id="core"><stop offset="0" stop-color="#ffd0da"/><stop offset=".45" stop-color="#ff8fa3"/><stop offset="1" stop-color="#ff8fa3" stop-opacity="0"/></radialGradient>
+      </defs>
+      <circle class="spin" cx="260" cy="240" r="215"/>
+      <ellipse class="orb" cx="260" cy="240" rx="235" ry="92" transform="rotate(-16 260 240)"/>
+      <ellipse class="orb" cx="260" cy="240" rx="175" ry="140" transform="rotate(28 260 240)"/>
+      <ellipse class="orb" cx="260" cy="240" rx="98" ry="205" transform="rotate(-52 260 240)"/>
+      <circle cx="260" cy="240" r="92" fill="url(#core)" opacity=".55"/>
+      <circle cx="260" cy="240" r="40" fill="#f6eef5"/>
+      <text x="260" y="251" text-anchor="middle" font-family="Inter Tight" font-weight="700" font-size="30" fill="#1a0f1f">aj</text>
+      <g transform="translate(46 262)"><g class="b n" data-l="nœud"><circle r="20" fill="#7cc6ff" opacity=".2"/><circle r="8" fill="#7cc6ff"/><text class="lbl" x="0" y="-18" text-anchor="middle">JARVIS</text></g></g>
+      <g transform="translate(470 168)"><g class="b n" data-l="nœud"><circle r="20" fill="#ffd166" opacity=".2"/><circle r="8" fill="#ffd166"/><text class="lbl" x="0" y="-18" text-anchor="middle">COMBO</text></g></g>
+      <g transform="translate(378 362)"><g class="b n" data-l="nœud"><circle r="20" fill="#7ef0b5" opacity=".2"/><circle r="8" fill="#7ef0b5"/><text class="lbl" x="0" y="32" text-anchor="middle">Robots</text></g></g>
+      <g transform="translate(150 390)"><g class="b n" data-l="nœud"><circle r="20" fill="#c59bff" opacity=".2"/><circle r="8" fill="#c59bff"/><text class="lbl" x="0" y="32" text-anchor="middle">Serveur</text></g></g>
+      <g transform="translate(196 76)"><g class="b n" data-l="nœud"><circle r="20" fill="#5ee7f0" opacity=".2"/><circle r="8" fill="#5ee7f0"/><text class="lbl" x="0" y="-18" text-anchor="middle">Hologrammes</text></g></g>
+      <g transform="translate(372 98)"><g class="b n" data-l="nœud"><circle r="20" fill="#ff9f5a" opacity=".2"/><circle r="8" fill="#ff9f5a"/><text class="lbl" x="0" y="-18" text-anchor="middle">Échecs</text></g></g>
+    </svg>
+  </div>
+</div>
+</section>
+
+<section class="band alt" id="projets" data-frame data-l="projets">
+<div class="in">
+  <div class="head">
+    <h2 class="t b" data-l="h2">Projets</h2>
+    <p class="t b" data-l="texte">Des projets perso, du logiciel au matériel. Chacun est né d'une envie précise.</p>
+  </div>
+  <div class="grid">
+      <article class="card b wide" style="--k:#7cc6ff" data-l="carte">
+        <span class="tag t b" data-l="tag">Assistant IA</span>
+        <h3 class="t b" data-l="titre">JARVIS</h3>
+        <p class="t b" data-l="texte">Mon assistant personnel sur PC. Il se lance au démarrage et me prépare les news tech et science qui m&#x27;intéressent. Objectif : un vrai Jarvis, relié à mon iPhone, qui résume mes messages le matin et répond pour moi sur Instagram.</p>
+        <div class="chips"><span class="chip b" data-l="chip">Démarrage auto</span><span class="chip b" data-l="chip">Veille tech</span><span class="chip b" data-l="chip">iPhone</span></div>
+      </article>
+      <article class="card b" style="--k:#ffd166" data-l="carte">
+        <span class="tag t b" data-l="tag">Appli</span>
+        <h3 class="t b" data-l="titre">COMBO</h3>
+        <p class="t b" data-l="texte">Une appli avec sa propre base de données, et une IA qui aide à composer des tenues et à préparer sa valise.</p>
+        <div class="chips"><span class="chip b" data-l="chip">Base de données</span><span class="chip b" data-l="chip">IA tenues</span><span class="chip b" data-l="chip">Valise</span></div>
+      </article>
+      <article class="card b" style="--k:#ff8fa3" data-l="carte">
+        <span class="tag t b" data-l="tag">Web</span>
+        <h3 class="t b" data-l="titre">Clone d’Instagram</h3>
+        <p class="t b" data-l="texte">Un site construit exactement comme Instagram, pour comprendre de l&#x27;intérieur comment fonctionne un réseau social.</p>
+        <div class="chips"><span class="chip b" data-l="chip">Web</span><span class="chip b" data-l="chip">Réseau social</span></div>
+      </article>
+      <article class="card b" style="--k:#7ef0b5" data-l="carte">
+        <span class="tag t b" data-l="tag">Robotique</span>
+        <h3 class="t b" data-l="titre">Robot gardien de plantes</h3>
+        <p class="t b" data-l="texte">Il surveille une plante : humidité du sol, pH et luminosité, affiche tout sur un écran et m&#x27;alerte sur mon téléphone.</p>
+        <div class="chips"><span class="chip b" data-l="chip">Capteurs</span><span class="chip b" data-l="chip">Écran</span><span class="chip b" data-l="chip">Alertes</span></div>
+      </article>
+      <article class="card b" style="--k:#b5f05e" data-l="carte">
+        <span class="tag t b" data-l="tag">Robotique</span>
+        <h3 class="t b" data-l="titre">Robot éviteur d’obstacles</h3>
+        <p class="t b" data-l="texte">Une voiture autonome sur châssis deux roues qui repère les obstacles aux ultrasons et choisit sa route.</p>
+        <div class="chips"><span class="chip b" data-l="chip">Arduino Uno</span><span class="chip b" data-l="chip">L298N</span><span class="chip b" data-l="chip">HC-SR04</span><span class="chip b" data-l="chip">Servo SG90</span></div>
+      </article>
+      <article class="card b" style="--k:#c59bff" data-l="carte">
+        <span class="tag t b" data-l="tag">Infra</span>
+        <h3 class="t b" data-l="titre">Serveur maison</h3>
+        <p class="t b" data-l="texte">Un serveur auto-hébergé, monté sur un Acer Nitro 5 recyclé pour l&#x27;occasion.</p>
+        <div class="chips"><span class="chip b" data-l="chip">Auto-hébergement</span><span class="chip b" data-l="chip">Linux</span></div>
+      </article>
+      <article class="card b" style="--k:#5ee7f0" data-l="carte">
+        <span class="tag t b" data-l="tag">Matériel</span>
+        <h3 class="t b" data-l="titre">Hologrammes</h3>
+        <p class="t b" data-l="texte">Un affichage volumétrique façon Iron Man : des LED en rotation pilotées par un ESP32.</p>
+        <div class="chips"><span class="chip b" data-l="chip">ESP32</span><span class="chip b" data-l="chip">LED</span><span class="chip b" data-l="chip">Persistance rétinienne</span></div>
+      </article>
+      <article class="card b" style="--k:#9fa8ff" data-l="carte">
+        <span class="tag t b" data-l="tag">Logiciel</span>
+        <h3 class="t b" data-l="titre">Logiciel de modélisation</h3>
+        <p class="t b" data-l="texte">Un outil de modélisation que j&#x27;ai développé.</p>
+        <div class="chips"><span class="chip b" data-l="chip">Logiciel</span></div>
+      </article>
+      <article class="card b" style="--k:#ff9f5a" data-l="carte">
+        <span class="tag t b" data-l="tag">IA</span>
+        <h3 class="t b" data-l="titre">IA d’échecs</h3>
+        <p class="t b" data-l="texte">Une IA qui joue aux échecs, en cours de conception.</p>
+        <div class="chips"><span class="chip b" data-l="chip">Recherche</span><span class="chip b" data-l="chip">Évaluation</span></div>
+      </article>
+    </div>
+  <p class="note t b" data-l="note">Démo : remplace ce contenu par le tien, le moteur s’adapte tout seul.</p>
+</div>
+</section>
+
+<section class="band" id="parcours" data-frame data-l="parcours">
+<div class="in">
+  <h2 class="t b" data-l="h2">Parcours</h2>
+  <div class="tl">
+      <div class="row b" data-l="étape">
+        <span class="y t b" data-l="date">Aujourd’hui</span>
+        <div><h3 class="t b" data-l="titre">BUT Informatique, IUT de Bordeaux</h3><p class="t b" data-l="texte">Délégué et représentant des étudiants de 1re année au conseil de département.</p></div>
+      </div>
+      <div class="row b" data-l="étape">
+        <span class="y t b" data-l="date">2022 – 2023</span>
+        <div><h3 class="t b" data-l="titre">Élu au CVL</h3><p class="t b" data-l="texte">Conseil de la vie lycéenne, en classe de seconde.</p></div>
+      </div>
+      <div class="row b" data-l="étape">
+        <span class="y t b" data-l="date">2021 – 2022</span>
+        <div><h3 class="t b" data-l="titre">Ateliers Scratch</h3><p class="t b" data-l="texte">Initiation à la programmation pour des collégiens.</p></div>
+      </div>
+      <div class="row b" data-l="étape">
+        <span class="y t b" data-l="date">2021 – 2022</span>
+        <div><h3 class="t b" data-l="titre">MUN à Dubaï</h3><p class="t b" data-l="texte">Simulation des Nations unies, en classe de 3e.</p></div>
+      </div>
+  </div>
+</div>
+</section>
+
+<section class="band alt" id="hors" data-frame data-l="hors écran">
+<div class="in">
+  <h2 class="t b" data-l="h2">Hors écran</h2>
+  <div class="side">
+      <div class="card b" data-l="carte">
+        <span class="tag t b" style="--k:#ff8fa3" data-l="tag">Manga</span>
+        <p class="t b" data-l="texte">Une histoire écrite en 2024 : les frères Haruto et Raiki, au village d’Aokaze. Chapitre 1 écrit, en cours d’illustration.</p>
+      </div>
+      <div class="card b" data-l="carte">
+        <span class="tag t b" style="--k:#ffd166" data-l="tag">Jeryo</span>
+        <p class="t b" data-l="texte">Ma marque de vêtements, créée en 2025.</p>
+      </div>
+      <div class="card b" data-l="carte">
+        <span class="tag t b" style="--k:#7ef0b5" data-l="tag">Sport</span>
+        <p class="t b" data-l="texte">Foot en R2, musculation, et le judo depuis l’enfance.</p>
+      </div>
+      <div class="card b" data-l="carte">
+        <span class="tag t b" style="--k:#c59bff" data-l="tag">Poésie</span>
+        <p class="t b" data-l="texte">Un projet d’écriture que je fais grandir à côté du code.</p>
+      </div>
+  </div>
+</div>
+</section>
+
+<section class="band contact" id="contact" data-frame data-l="contact">
+<div class="in">
+  <h2 class="t b" data-l="h2">On construit quelque chose ?</h2>
+  <p class="t b" data-l="texte">Stage, projet ou simple échange : écris-moi sur LinkedIn ou passe voir mon code sur GitHub.</p>
+  <div class="cta">
+    <a class="btn main b" href="https://github.com/ukiyoaj" data-l="lien">GitHub · ukiyoaj</a>
+    <a class="btn b" href="https://www.linkedin.com/in/amine-jebali-888993399" data-l="lien">LinkedIn</a>
+  </div>
+</div>
+</section>
+<footer data-frame data-l="footer"><span class="b" data-l="texte">© 2026 Amine Jebali</span><span class="b" data-l="texte">Construit en direct avec <a href="https://github.com/ukiyoaj/chantier-en-direct">Chantier en direct</a></span></footer>
+
+</body>
+</html>
